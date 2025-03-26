@@ -28,7 +28,7 @@ def validate_data(record, schema):
             failed_column = error.path[0] if error.path else "Unknown Column"
             error_message = f"Invalid record in column '{failed_column}': {error.message}"
             errors.append(error_message)
-            print(f"Validation error in column '{failed_column}': {error.message}")
+            # Removed print statement to suppress console output
         
         return False, "Multiple validation errors", errors
     except Exception as e:
