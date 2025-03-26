@@ -28,6 +28,10 @@ Key features include:
 - Extensible rule definitions, allowing new regulatory requirements to be incorporated seamlessly.
 
 🖼️ Screenshots:
+### Generate rules page
+![Generate rules page](image-generate.png)
+### Validate rules page
+![Validate rules page](image-validate.png)
 
 
 # Architecture Diagram
