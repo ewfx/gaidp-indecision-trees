@@ -44,15 +44,30 @@ def validate_dataframe(df, schema):
         for field, properties in schema.get("properties", {}).items():
             if field in record and record[field] not in ["", "NA", "NONE"]:
                 try:
-                    if "integer" in properties["type"]:
+                    # Safely get the type name as a string
+                    if isinstance(properties["type"], list):
+                        type_name = properties["type"][0]
+                    else:
+                        type_name = properties["type"]
+                    
+                    if type_name == "integer":
                         record[field] = int(record[field])
-                    elif "number" in properties["type"]:
+                    elif type_name == "number":
                         record[field] = float(record[field])
                     elif properties.get("format") == "date":
                         record[field] = convert_date(record[field])
-                except ValueError:
-                    print(field, record[field])
-                    record[field] = f"INVALID_{properties['type'].upper()}"
+                except (ValueError, KeyError, TypeError) as e:
+                    print(f"Error processing field {field}: {record[field]}")
+                    print(f"Error details: {str(e)}")
+                    
+                    # Ensure type_name is a string before calling upper()
+                    if 'type_name' not in locals():
+                        if isinstance(properties.get("type"), list):
+                            type_name = properties["type"][0]
+                        else:
+                            type_name = str(properties.get("type", "unknown"))
+                    
+                    record[field] = f"INVALID_{type_name.upper()}"
 
         is_valid, message, errors = validate_data(record, schema)
 
