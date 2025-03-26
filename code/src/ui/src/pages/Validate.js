@@ -4,29 +4,7 @@ import { FiUploadCloud } from "react-icons/fi";
 
 function Validate() {
   const [file, setFile] = useState(null);
-  const [results, setResults] = useState([
-    {
-      transactionId: 1001,
-      errors: [
-        "Invalid date format (expected YYYY-MM-DD, got 03/24/2025).",
-        "Amount exceeds limit ($12,000 > $10,000)."
-      ]
-    },
-    {
-      transactionId: 1002,
-      errors: [
-        "User authentication missing.",
-        "Email format incorrect (missing '@')."
-      ]
-    },
-    {
-      transactionId: 1003,
-      errors: [
-        "Transaction ID missing.",
-        "Negative amount is not allowed."
-      ]
-    }
-  ]);
+  const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const handleFileChange = (e) => setFile(e.target.files[0]);
@@ -40,9 +18,16 @@ function Validate() {
 
     try {
       const response = await axios.post("http://localhost:8000/validate", formData);
-      setResults(response.data.results);
+      
+      // Ensure the response data exists and has results
+      if (response.data && response.data.results) {
+        setResults(response.data.results);
+      } else {
+        setResults([]); // Set empty array if no results
+      }
     } catch (error) {
       console.error("Error validating data:", error);
+      setResults([]); // Clear results on error
     }
     setLoading(false);
   };
@@ -76,14 +61,14 @@ function Validate() {
 
       
 
-      {results.length > 0 && (
+      {results && results.length > 0 && (
         <div className="mt-6">
           <h2 className="text-lg font-bold">Validation Results</h2>
           {results.map((validation, index) => (
             <div key={index} className="bg-red-100 p-4 my-3 rounded-lg shadow">
               <p className="font-semibold">Transaction ID: {validation.transactionId}</p>
               <ul className="list-disc pl-5 text-red-600">
-                {validation.errors.map((error, i) => (
+                {validation.errors && validation.errors.map((error, i) => (
                   <li key={i}>{error}</li>
                 ))}
               </ul>
