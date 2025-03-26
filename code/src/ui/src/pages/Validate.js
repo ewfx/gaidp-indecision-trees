@@ -77,7 +77,7 @@ function Validate() {
               .map((validation, index) => (
                 <div key={index} className="bg-red-100 p-4 my-3 rounded-lg shadow">
                   <p className="font-semibold">
-                    {validation.firstColumn} {validation.Message}
+                    {validation.firstColumn}  {/* Only show first column value */}
                   </p>
                   <ul className="list-disc pl-5 text-red-600">
                     {validation.Errors.map((error, i) => (
