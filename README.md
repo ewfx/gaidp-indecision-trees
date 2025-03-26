@@ -35,7 +35,51 @@ Key features include:
 
 ## ⚙️ What It Does
 
-Explain the key features and functionalities of your project.
+This solution automates the tedious process of manually reading regulatory documents and verifying data compliance. Here's how it works:
+
+### Key Features:
+1. **PDF Parsing & Rule Extraction**: 
+   - Extracts text from PDF documents using PyPDF2
+   - Utilizes AI (Gemini API) to generate initial rules from unstructured text
+   - Creates a structured JSON schema from the extracted rules
+
+2. **Data Validation Engine**: 
+   - Validates CSV data against the JSON schema rules
+   - Provides detailed error reporting for non-compliant data
+   - Uses pandas for efficient data processing
+
+3. **Stress Tested for Performance**: 
+   - Handles datasets ranging from 11 to 110,000 rows
+   - Optimized for both speed and memory usage
+   - Linear scalability in processing time
+
+4. **User-Friendly Interface**: 
+   - React-based frontend for easy file uploads
+   - Real-time validation results display
+   - Intuitive UI for non-technical users
+
+### Automation Flow:
+1. **PDF Processing**:
+   - Upload a regulatory PDF document
+   - System extracts relevant text and uses AI to identify key rules
+   - Automatically converts these rules into a JSON schema
+
+2. **Rule Application**:
+   - Users upload CSV data files
+   - System validates data against the JSON schema rules
+   - Provides detailed validation results
+
+3. **Continuous Improvement**:
+   - Easily update rules by processing new PDF documents
+   - Extendable schema allows adding new validation rules
+   - Maintains complete audit trail of validations
+
+This system significantly reduces the manual effort required to:
+- Read and interpret lengthy regulatory documents
+- Manually cross-check data against compliance rules
+- Generate and maintain validation rules
+
+The automation not only speeds up the process but also reduces human error and ensures consistent application of regulatory requirements.
 
 ## 🛠️ How We Built It
 
