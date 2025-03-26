@@ -10,7 +10,7 @@ with open("cre-json-schema.json", "r") as schema_file:
     schema = json.load(schema_file)
 
 # Load the CSV file
-csv_file_path = "sample_dataset_cre.csv"  # Replace with your actual file path
+csv_file_path = "new.csv"  # Replace with your actual file path
 df = pd.read_csv(
     csv_file_path,
     dtype=str,               # Read all data as strings initially
@@ -30,18 +30,39 @@ def convert_date(value):
     except ValueError:
         return "INVALID_DATE"  # Mark invalid dates
 
+
 # Function to validate data against schema
 def validate_data(record, schema):
+    # errors = []
+    # try:
+    #     validate(instance=record, schema=schema)
+    #     return True, "Valid record"
+    # except jsonschema.exceptions.ValidationError as err:
+    #     failed_column = err.path[0] if err.path else "Unknown Column"
+    #     print(f"Validation error in column '{failed_column}': {err.message}")
+    #     return False, f"Invalid record in column '{failed_column}': {err.message}"
+
+    errors = []
     try:
-        validate(instance=record, schema=schema)
-        return True, "Valid record"
-    except jsonschema.exceptions.ValidationError as err:
-        print(err.message)
-        return False, f"Invalid record: {err.message}"
+        validator = jsonschema.Draft7Validator(schema)
+        error_list = list(validator.iter_errors(record))
+        
+        if not error_list:
+            return True, "Valid record", []
+        
+        for error in error_list:
+            failed_column = error.path[0] if error.path else "Unknown Column"
+            error_message = f"Invalid record in column '{failed_column}': {error.message}"
+            errors.append(error_message)
+            print(f"Validation error in column '{failed_column}': {error.message}")
+        
+        return False, "Multiple validation errors found", errors
+    except Exception as e:
+        return False, f"Validation failed: {str(e)}", [str(e)]
+
 
 # Convert DataFrame rows to dictionary and validate each record
 validation_results = []
-print(df)
 for _, row in df.iterrows():  # Iterate without using index
     record = row.to_dict()
 
@@ -56,21 +77,23 @@ for _, row in df.iterrows():  # Iterate without using index
                 elif properties.get("format") == "date":
                     record[field] = convert_date(record[field])
             except ValueError:
-                # print(field, record[field])
+                print(field, record[field])
                 record[field] = f"INVALID_{properties['type'].upper()}"
 
-    is_valid, message = validate_data(record, schema)
+    is_valid, message, errors = validate_data(record, schema)
 
-    # Append the original row with validation results
-    record["Status"] = "Valid" if is_valid else "Invalid"
-    record["Message"] = message
-    # print(record)
-    if is_valid == False:
-        break
-    validation_results.append(record["Status"])
+    result = {
+        "Status": "Valid" if is_valid else "Invalid",
+        "Message": message,
+        "Errors": "; ".join(errors) if errors else ""
+    }
+    validation_results.append(result)
+    results_df = pd.DataFrame(validation_results)
+    csv_result = results_df.to_csv(index=False)
+
+
 
 # Convert results to DataFrame and save to CSV
 results_df = pd.DataFrame(validation_results)
 results_df.to_csv("validation_results.csv", index=False)
-
 print("Validation completed. Results saved to validation_results.csv")
