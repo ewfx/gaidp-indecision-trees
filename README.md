@@ -37,6 +37,32 @@ Explain the key features and functionalities of your project.
 
 ## 🛠️ How We Built It
 
+1. **Parsing Large PDF Files**  
+   We used PyPDF2 to extract text from large PDF files and the Gemini API through Google's generative AI endpoints to process the content and generate initial rules.
+
+2. **Rule Generation & Engine**  
+   Our system creates a JSON schema-based rules engine that can dynamically accept and validate rules. The engine uses jsonschema for validation and pandas for efficient data processing.
+
+3. **Scalable Processing**  
+   The core validation logic is optimized using pandas for fast data manipulation. We implemented async operations in FastAPI to handle multiple requests efficiently.
+
+4. **API Development**  
+   Built with FastAPI, our backend provides endpoints for file validation and schema management. The API is designed to be lightweight and fast, with proper error handling.
+
+5. **User Interface**  
+   A React frontend provides an intuitive interface for uploading files and viewing results. The UI is optimized for performance using React components.
+
+6. **Integration & Bundling**  
+   The application is containerized and bundled using modern JavaScript packaging, making it easy to deploy as a single application.
+
+Key Technologies Used:
+- **Backend:** FastAPI for high-performance API handling
+- **Frontend:** React for component-based UI
+- **Data Processing:** pandas for efficient data manipulation
+- **Validation:** jsonschema for schema validation
+- **PDF Processing:** PyPDF2 for text extraction
+- **AI Integration:** Google's Gemini API for rule generation
+
 ## 🚧 Challenges We Faced
 1. **Difficulty in Parsing Large Files:** One of the primary challenges was effectively parsing very large files. Large Language Models (LLMs) face issues when dealing with such large data. It is essential to parse this extensive information without losing crucial details, which demands sophisticated methods and technologies.
 2. **Test Data Generation:** Another major hurdle was the generation of test data that accurately reflected real-world scenarios. This process was complex as it needed to ensure the test data was comprehensive and representative, allowing us to thoroughly validate our solutions and predict potential issues.
