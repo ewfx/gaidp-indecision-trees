@@ -4,16 +4,16 @@ import psutil
 import os
 import pandas as pd
 import json
-from pathlib import Path
 import logging
+from pathlib import Path
 
 # Configure logging to suppress validation errors
 logging.basicConfig(
-    level=logging.INFO,
+    level=logging.WARNING,  # Set to WARNING to suppress lower level messages
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('validation.log'),
-        logging.StreamHandler()
+        logging.FileHandler('validation.log'),  # Log errors to file
+        # Removed StreamHandler to suppress console output
     ]
 )
 
