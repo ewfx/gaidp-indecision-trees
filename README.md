@@ -29,7 +29,9 @@ Key features include:
 
 🖼️ Screenshots:
 
-![Screenshot 1](link-to-image)
+
+# Architecture Diagram
+![Screenshot 1](artifacts/arch/architecture_diagram.jpg)
 
 ## ⚙️ What It Does
 
