@@ -44,8 +44,8 @@ def run_validation(file_path, schema_path):
 def main():
     # Get the paths relative to this script
     base_dir = Path(__file__).parent.parent
-    file_path = base_dir / "sample_dataset_cre.csv"
-    schema_path = base_dir / "cre-json-schema.json"
+    file_path = base_dir / "src" / "sample_dataset_cre.csv"  # Fixed path
+    schema_path = base_dir / "src" / "cre-json-schema.json"  # Fixed path
     
     if not file_path.exists():
         print(f"Error: CSV file not found at {file_path}")
