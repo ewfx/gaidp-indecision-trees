@@ -84,6 +84,54 @@ Note: Make sure you have Python and Node.js installed on your system before runn
 - 🔹 Database: 
 - 🔹 Other: OpenAI API
 
+## 📈 Scalability
+Our solution is designed with scalability in mind, using FastAPI for high-performance backend processing and React for efficient frontend rendering. The system demonstrates linear scalability in both processing time and memory usage as shown in our stress test results below.
+
+```
+Starting stress test...
+--------------------------------------------------------------------------------
+Base dataset rows: 11
+Using schema: /Users/ashish/Desktop/Projects/gaidp-indecision-trees/code/src/cre-json-schema.json
+--------------------------------------------------------------------------------
+
+Simulating dataset with 11 rows...
+  Completed in 0.0059 seconds
+  Memory usage: 0.12 MB
+  Processed rows: 11
+  Valid rows: 5
+  Invalid rows: 6
+
+Simulating dataset with 110 rows...
+  Completed in 0.0343 seconds
+  Memory usage: 0.06 MB
+  Processed rows: 110
+  Valid rows: 50
+  Invalid rows: 60
+
+Simulating dataset with 1100 rows...
+  Completed in 0.3309 seconds
+  Memory usage: 0.41 MB
+  Processed rows: 1100
+  Valid rows: 500
+  Invalid rows: 600
+
+Simulating dataset with 11000 rows...
+  Completed in 3.3055 seconds
+  Memory usage: 8.58 MB
+  Processed rows: 11000
+  Valid rows: 5000
+  Invalid rows: 6000
+
+Simulating dataset with 110000 rows...
+  Completed in 34.4670 seconds
+  Memory usage: 54.88 MB
+  Processed rows: 110000
+  Valid rows: 50000
+  Invalid rows: 60000
+
+Stress test completed.
+```
+
 ## 👥 Team
 - **Pravanya Amirishetty** - [GitHub](#) | [LinkedIn](#)
 - **Deepak R. Naik** - [GitHub](#) | [LinkedIn](#)
