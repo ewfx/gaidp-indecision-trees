@@ -29,9 +29,9 @@ Key features include:
 
 🖼️ Screenshots:
 ### Generate rules page
-![Generate rules page](image-generate.png)
+![Generate rules page](artifacts/arch/image-generate.png)
 ### Validate rules page
-![Validate rules page](image-validate.png)
+![Validate rules page](artifacts/arch/image-validate.png)
 
 
 # Architecture Diagram
