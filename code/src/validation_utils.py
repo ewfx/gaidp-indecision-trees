@@ -38,6 +38,9 @@ def validate_data(record, schema):
 def validate_dataframe(df, schema):
     validation_results = []
     for _, row in df.iterrows():  # Iterate without using index
+        # Get the first column value (assuming it's the first column in the DataFrame)
+        first_column_value = row[df.columns[0]]
+        
         record = row.to_dict()
 
         # Convert fields based on schema type while ignoring empty values
@@ -72,6 +75,7 @@ def validate_dataframe(df, schema):
         is_valid, message, errors = validate_data(record, schema)
 
         result = {
+            "id": str(first_column_value),  # Add id field with first column value
             "Status": "Valid" if is_valid else "Invalid",
             "Message": message,
             "Errors": errors if errors else []
