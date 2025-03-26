@@ -1,0 +1,399 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Commercial Real Estate Loan Schema",
+  "description": "Schema for FR Y-14Q Commercial Real Estate (CRE) Loan data collection",
+  "type": "object",
+  "required": [
+    "LoanNumber",
+    "ObligorName",
+    "OutstandingBalance",
+    "LineReportedOnFRY9C",
+    "CommittedBalance",
+    "CumulativeChargeoffs",
+    "ParticipationFlag",
+    "LienPosition",
+    "PropertyType",
+    "OriginationDate",
+    "Location",
+    "ValueatOrigination",
+    "ValueBasis",
+    "InternalRating",
+    "PD",
+    "LGD",
+    "EAD",
+    "MaturityDate",
+    "Amortization",
+    "Recourse",
+    "CurrentOccupancy",
+    "LoanPurpose",
+    "InterestRateVariability",
+    "InterestRate",
+    "InterestRateIndex",
+    "InterestRateSpread",
+    "InterestRateCeiling",
+    "InterestRateFloor",
+    "FrequencyofRateReset",
+    "InterestReserves",
+    "OriginationAmount",
+    "OrigLoanNumber",
+    "AcqLoan",
+    "PastDue",
+    "NonAccrualDate",
+    "PropertySize",
+    "CurrentNetOperatingInc",
+    "LastNOIDate",
+    "CurrentValue",
+    "LastValuationDate",
+    "TroubledDebtRestructuring",
+    "LOCOM",
+    "SNCInternalCreditID",
+    "RenewalDate",
+    "CreditFacilityCurrency",
+    "CurrentValueBasis",
+    "PrepaymentPenaltyFlag",
+    "ParticipationInterest",
+    "LeveragedLoanFlag",
+    "DispositionFlag",
+    "ASC32620",
+    "CurrentMaturityDate",
+    "CommittedExposureGlobalParValue",
+    "OutstandingBalanceParValue",
+    "CommittedExposureGlobalFairValue",
+    "OutstandingBalanceFairValue",
+    "ObligorLEI"
+  ],
+  "properties": {
+    "LoanNumber": {
+      "type": "string",
+      "description": "The reporting entity's unique internal identifier for this credit facility record",
+      "pattern": "^[^\\r\\n,\\x00-\\x1F]+$"
+    },
+    "ObligorName": {
+      "type": "string",
+      "description": "The obligor name on the loan. For individual borrowers, use 'Individual'",
+      "pattern": "^[^|\\r\\n,\\x00-\\x1F]+$"
+    },
+    "OutstandingBalance": {
+      "type": "integer",
+      "description": "Outstanding funded balance. Report 0 for fully undrawn commitments or disposed facilities",
+      "minimum": 0
+    },
+    "LineReportedOnFRY9C": {
+      "type": "integer",
+      "description": "FR Y-9C schedule HC-C line item in which the outstanding balance is recorded",
+      "enum": [1, 2, 3, 5, 7]
+    },
+    "CommittedBalance": {
+      "type": "integer",
+      "description": "Total commitment amount as the sum of loan and lease financing receivables and any unused portion",
+      "minimum": 0
+    },
+    "CumulativeChargeoffs": {
+      "type": ["integer", "string"],
+      "description": "Cumulative net charge-offs associated with this CRE loan on the reporting entity's books",
+      "minimum": 0
+    },
+    "ParticipationFlag": {
+      "type": "integer",
+      "description": "Indicates if the CRE Loan is participated or syndicated among other financial institutions",
+      "enum": [1, 2, 3, 4, 5]
+    },
+    "LienPosition": {
+      "type": "integer",
+      "description": "Indicates if the mortgage is a first lien on the property or a subordinate lien",
+      "enum": [1, 2, 3, 5]
+    },
+    "PropertyType": {
+      "type": "integer",
+      "description": "Indicates the predominant property type",
+      "enum": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    },
+    "OriginationDate": {
+      "type": "string",
+      "description": "The contractual date of the credit agreement",
+      "format": "date",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "Location": {
+      "type": "string",
+      "description": "Five-digit ZIP Code for US properties or ISO Country Code for foreign properties",
+      "pattern": "^(\\d{5}|[A-Z]{2}|Multiple)$"
+    },
+    "NetOperatingIncome": {
+      "type": ["integer", "string"],
+      "description": "Net Operating Income (NOI) at origination"
+    },
+    "ValueatOrigination": {
+      "type": "integer",
+      "description": "Value of the subject property at origination",
+      "minimum": 0
+    },
+    "ValueBasis": {
+      "type": "integer",
+      "description": "Indicates if the Value was calculated using an 'as is,' 'as stabilized,' or 'as completed' value",
+      "enum": [1, 2, 3]
+    },
+    "InternalRating": {
+      "type": "string",
+      "description": "The bank's internal obligor rating that addresses the probability of default of the loan",
+      "pattern": "^[A-Za-z0-9\\-\\+]+:\\d+(\\.\\d+)?(;[A-Za-z0-9\\-\\+]+:\\d+(\\.\\d+)?)*$"
+    },
+    "PD": {
+      "type": ["string", "number"],
+      "description": "The advanced IRB parameter estimate for the probability of default (PD)",
+      "pattern": "^(NA|\\d+(\\.\\d{1,4})?)$"
+    },
+    "LGD": {
+      "type": ["string", "number"],
+      "description": "The advanced IRB LGD estimate at the loan level",
+      "pattern": "^(NA|\\d+(\\.\\d{1,2})?)$"
+    },
+    "EAD": {
+      "type": ["string", "integer"],
+      "description": "The advanced IRB parameter estimate for the Exposure at Default (EAD)",
+      "pattern": "^(NA|\\d+)$"
+    },
+    "MaturityDate": {
+      "type": "string",
+      "description": "The maturity date per the loan agreement, including extension options at borrower's discretion",
+      "format": "date",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "Amortization": {
+      "type": ["integer", "string"],
+      "description": "Original amortization term of the loan in months from origination date",
+      "pattern": "^(\\-1|\\d+)$"
+    },
+    "Recourse": {
+      "type": "integer",
+      "description": "Indicates whether the credit facility provides full, partial or no recourse",
+      "enum": [3, 4, 5]
+    },
+    "LineOfBusiness": {
+      "type": "string",
+      "description": "Indicates the internal line of business"
+    },
+    "CurrentOccupancy": {
+      "type": ["string", "number"],
+      "description": "Current physical occupancy of rent-paying tenants as % of net rentable square footage",
+      "pattern": "^(NA|\\d+(\\.\\d{1,2})?)$"
+    },
+    "AnchorTenant": {
+      "type": "string",
+      "description": "Name of anchor tenant(s), if applicable",
+      "pattern": "^[^|\\r\\n,\\x00-\\x1F]*$"
+    },
+    "LoanPurpose": {
+      "type": "integer",
+      "description": "Indicates the purpose of the CRE Loan at the origination date",
+      "enum": [1, 2, 3, 6, 7, 8, 9]
+    },
+    "InterestRateVariability": {
+      "type": "integer",
+      "description": "Indicates the variability of current interest rates (Fixed, Floating, or Mixed) to maturity",
+      "enum": [1, 2, 3, 4]
+    },
+    "InterestRate": {
+      "type": ["string", "number"],
+      "description": "Current interest rate charged on the CRE Loan",
+      "pattern": "^(NA|\\d+(\\.\\d+)?)$"
+    },
+    "InterestRateIndex": {
+      "type": "integer",
+      "description": "For floating rate CRE Loans, the base interest rate",
+      "enum": [1, 2, 3, 4, 5, 6, 7]
+    },
+    "InterestRateSpread": {
+      "type": ["string", "number"],
+      "description": "For floating rate CRE Loans, the spread from base rate in basis points",
+      "pattern": "^(NA|-?\\d+(\\.\\d+)?)$"
+    },
+    "InterestRateCeiling": {
+      "type": ["string", "number"],
+      "description": "For floating rate CRE Loans, the rate ceiling in the credit agreement",
+      "pattern": "^(NA|NONE|\\d+(\\.\\d+)?)$"
+    },
+    "InterestRateFloor": {
+      "type": ["string", "number"],
+      "description": "For floating rate CRE Loans, the rate floor in the credit agreement",
+      "pattern": "^(NA|NONE|\\d+(\\.\\d+)?)$"
+    },
+    "FrequencyofRateReset": {
+      "type": ["string", "integer"],
+      "description": "For floating rate CRE Loans, the frequency of interest rate reset in months",
+      "pattern": "^(NA|\\d+)$"
+    },
+    "InterestReserves": {
+      "type": "integer",
+      "description": "Dollar amount of remaining interest rate reserves",
+      "minimum": 0
+    },
+    "OriginationAmount": {
+      "type": "integer",
+      "description": "The bank's total commitment as of the origination date",
+      "minimum": 0
+    },
+    "OrigLoanNumber": {
+      "type": "string",
+      "description": "Internal identification code assigned to the credit facility record in the previous submission",
+      "pattern": "^[^\\r\\n\\x00-\\x1F]+$"
+    },
+    "AcqLoan": {
+      "type": "integer",
+      "description": "Indicates if the loan was acquired via a bank, portfolio or individual loan purchase",
+      "enum": [1, 2]
+    },
+    "PastDue": {
+      "type": "integer",
+      "description": "Longest number of days principal and/or interest payments are past due",
+      "minimum": 0
+    },
+    "NonAccrualDate": {
+      "type": "string",
+      "description": "Date the credit facility was placed on non-accrual, if applicable",
+      "format": "date",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "PropertySize": {
+      "type": ["string", "integer"],
+      "description": "Size of the property securing the facility",
+      "pattern": "^(NA|Other|\\d+)$"
+    },
+    "CurrentNetOperatingInc": {
+      "type": ["string", "integer"],
+      "description": "Most recent annualized NOI as of the report date",
+      "pattern": "^(NA|-?\\d+)$"
+    },
+    "LastNOIDate": {
+      "type": ["string", "null"],
+      "description": "Date for the value provided in CurrentNetOperatingInc",
+      "format": "date",
+      "pattern": "^(|\\d{4}-\\d{2}-\\d{2})$"
+    },
+    "CurrentValue": {
+      "type": "integer",
+      "description": "Most recent value of the subject property",
+      "minimum": 0
+    },
+    "LastValuationDate": {
+      "type": "string",
+      "description": "Date of the most recent valuation provided in Current Value",
+      "format": "date",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "CrossCollateralizedLoans": {
+      "type": ["string", "null"],
+      "description": "LoanNumbers for all loans which are cross-collateralized with loans reported in Field 1",
+      "pattern": "^([^,\\r\\n\\x00-\\x1F]+(,[^,\\r\\n\\x00-\\x1F]+)*)?$"
+    },
+    "AdditionalCollateral": {
+      "type": ["integer", "null"],
+      "description": "Value of any cash and marketable securities that are pledged as collateral",
+      "minimum": 0
+    },
+    "TroubledDebtRestructuring": {
+      "type": "integer",
+      "description": "Indicates whether the loan has been restructured in a troubled debt restructuring",
+      "enum": [1, 2]
+    },
+    "LOCOM": {
+      "type": "integer",
+      "description": "Indicates whether the loan is accounted for under fair value option or held for sale at LOCOM",
+      "enum": [1, 2, 3]
+    },
+    "SNCInternalCreditID": {
+      "type": "string",
+      "description": "Internal Credit ID as reported in the Shared National Credit collection",
+      "pattern": "^(NA|[^\\r\\n,\\x00-\\x1F]+)$"
+    },
+    "RenewalDate": {
+      "type": "string",
+      "description": "Date on which the most recent renewal notification became effective",
+      "format": "date",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "CreditFacilityCurrency": {
+      "type": "string",
+      "description": "Currency denomination for contractual principal and interest payments on the credit facility",
+      "pattern": "^[A-Z]{3}$"
+    },
+    "CurrentOccupancyDate": {
+      "type": ["string", "null"],
+      "description": "Date on which the most recent occupancy level was determined by the borrower",
+      "format": "date",
+      "pattern": "^(|\\d{4}-\\d{2}-\\d{2})$"
+    },
+    "CurrentValueBasis": {
+      "type": "integer",
+      "description": "Indicates if the Current Value was calculated using 'as is,' 'as stabilized,' or 'as completed' value",
+      "enum": [1, 2, 3]
+    },
+    "PrepaymentPenaltyFlag": {
+      "type": "integer",
+      "description": "Indicates whether the credit facility has a prepayment penalty clause in effect",
+      "enum": [1, 2, 3]
+    },
+    "ParticipationInterest": {
+      "type": "number",
+      "description": "For participated or syndicated credit facilities, the percentage of the total loan commitment held",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "LeveragedLoanFlag": {
+      "type": "integer",
+      "description": "Indicates if the credit facility is defined as a leveraged loan per internal risk framework",
+      "enum": [1, 2]
+    },
+    "DispositionFlag": {
+      "type": "integer",
+      "description": "Indicates the disposition method for any credit facility disposed during the reporting quarter",
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7]
+    },
+    "DispositionScheduleShift": {
+      "type": ["string", "null"],
+      "description": "Y-14 report, schedule, and sub-schedule to which the credit facility shifted",
+      "pattern": "^([QM]\\.[A-Z]\\.[0-9])?$"
+    },
+    "ASC32620": {
+      "type": "integer",
+      "description": "Allowance for credit losses per ASC 326-20",
+      "minimum": 0
+    },
+    "PCDNoncreditDiscount": {
+      "type": ["integer", "null"],
+      "description": "For purchased credit-deteriorated assets, the noncredit discount resulting from acquisition",
+      "minimum": 0
+    },
+    "CurrentMaturityDate": {
+      "type": "string",
+      "description": "Maturity date as the last date upon which funds must be repaid, exclusive of extension options",
+      "format": "date",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "CommittedExposureGlobalParValue": {
+      "type": ["string", "integer"],
+      "description": "Total commitment amount the obligor is contractually allowed to borrow for held for sale or fair value loans",
+      "pattern": "^(NA|\\-?\\d+)$"
+    },
+    "OutstandingBalanceParValue": {
+      "type": ["string", "integer"],
+      "description": "Outstanding funded exposure for held for sale or fair value loans",
+      "pattern": "^(NA|\\-?\\d+)$"
+    },
+    "CommittedExposureGlobalFairValue": {
+      "type": ["string", "integer"],
+      "description": "Fair value of the entire credit facility for held for sale or fair value loans",
+      "pattern": "^(NA|\\-?\\d+)$"
+    },
+    "OutstandingBalanceFairValue": {
+      "type": ["string", "integer"],
+      "description": "Fair value of the outstanding funded exposure for held for sale or fair value loans",
+      "pattern": "^(NA|\\-?\\d+)$"
+    },
+    "ObligorLEI": {
+      "type": "string",
+      "description": "Legal Entity Identifier (LEI) of the obligor, if available",
+      "pattern": "^(NA|[A-Za-z0-9]{20})$"
+    }
+  }
+}
