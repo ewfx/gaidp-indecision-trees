@@ -98,12 +98,6 @@ function Validate() {
               Total Rows with Errors: {results.filter(result => result.Status === "Invalid").length}
             </p>
           </div>
-
-          {/* Debug logging for results structure */}
-          <pre className="mt-4 p-2 bg-gray-100 rounded text-xs overflow-auto max-h-60">
-            <strong>Results Structure:</strong>
-            {JSON.stringify(results, null, 2)}
-          </pre>
         </div>
       )}
 
