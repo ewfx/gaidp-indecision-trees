@@ -70,15 +70,20 @@ for _, row in df.iterrows():  # Iterate without using index
     for field, properties in schema.get("properties", {}).items():
         if field in record and record[field] not in ["", "NA", "NONE"]:
             try:
-                if "integer" in properties["type"]:
+                # Handle the case where type might be a list (e.g., ["integer", "string"])
+                type_name = properties["type"] if isinstance(properties["type"], str) else properties["type"][0]
+                
+                if type_name == "integer":
                     record[field] = int(record[field])
-                elif "number" in properties["type"]:
+                elif type_name == "number":
                     record[field] = float(record[field])
                 elif properties.get("format") == "date":
                     record[field] = convert_date(record[field])
-            except ValueError:
+            except (ValueError, KeyError):
                 print(field, record[field])
-                record[field] = f"INVALID_{properties['type'].upper()}"
+                # Use the actual type name from the schema
+                type_name = properties["type"] if isinstance(properties["type"], str) else properties["type"][0]
+                record[field] = f"INVALID_{type_name.upper()}"
 
     is_valid, message, errors = validate_data(record, schema)
 
