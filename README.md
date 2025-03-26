@@ -47,18 +47,36 @@ This project leverages a range of technologies and tools to ensure accurate and 
 
 ## 🏃 How to Run
 
-1. Clone the repository
+1. Clone the repository  
    ```sh
    git clone https://github.com/your-repo.git
    ```
-2. Install dependencies
+
+2. Install Python dependencies for the FastAPI backend:
    ```sh
-   npm install  # or pip install -r requirements.txt (for Python)
+   cd code/src
+   pip install -r requirements.txt
    ```
-3. Run the project
+
+3. Install Node.js dependencies for the React frontend:
    ```sh
-   npm start  # or python app.py
+   cd ../ui
+   npm install
    ```
+
+4. Start the FastAPI backend:
+   ```sh
+   cd ../../code/src
+   uvicorn api:app --reload
+   ```
+
+5. In a separate terminal, start the React frontend:
+   ```sh
+   cd ../ui
+   npm start
+   ```
+
+Note: Make sure you have Python and Node.js installed on your system before running these commands. The backend runs on port 8000 and the frontend runs on port 3000.
 
 ## 🏗️ Tech Stack
 - 🔹 Frontend: React 
