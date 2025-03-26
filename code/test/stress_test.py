@@ -8,6 +8,7 @@ from pathlib import Path
 
 # Import the validation function from the parent directory
 sys.path.append(str(Path(__file__).parent.parent))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "src")))
 from validation_utils import validate_dataframe
 
 def run_validation(file_path, schema_path):
