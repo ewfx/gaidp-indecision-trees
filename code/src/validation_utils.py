@@ -74,7 +74,7 @@ def validate_dataframe(df, schema):
         result = {
             "Status": "Valid" if is_valid else "Invalid",
             "Message": message,
-            "Errors": "; ".join(errors) if errors else ""
+            "Errors": errors if errors else []
         }
         validation_results.append(result)
     

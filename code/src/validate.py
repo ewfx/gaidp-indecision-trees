@@ -90,7 +90,7 @@ for _, row in df.iterrows():  # Iterate without using index
     result = {
         "Status": "Valid" if is_valid else "Invalid",
         "Message": message,
-        "Errors": "; ".join(errors) if errors else ""
+        "Errors": errors if errors else []
     }
     validation_results.append(result)
     results_df = pd.DataFrame(validation_results)
