@@ -70,7 +70,7 @@ def main():
     df = pd.read_csv(file_path, dtype=str, keep_default_na=False)
     
     # Define the scale factors for each run
-    scale_factors = [1, 10, 100, 1000]
+    scale_factors = [1, 10, 100, 1000, 10000]
     
     print("\nStarting stress test...")
     print("-" * 80)
