@@ -1,12 +1,12 @@
-# Test Scripts for CSV Validation System
+# Rules Engine Stress Test
 
-This directory contains test scripts for validating the performance and functionality of the CSV validation system.
+This directory contains stress test scripts for validating the performance of the rules engine.
 
 ## Available Tests
 
 ### 1. Stress Test (`stress_test.py`)
 
-Tests the performance of the validation logic by running it multiple times and measuring:
+Tests the performance of the rules engine by running validation multiple times and measuring:
 - Execution time
 - Memory usage
 - Number of rows processed
@@ -14,30 +14,9 @@ Tests the performance of the validation logic by running it multiple times and m
 
 **Usage:**
 ```bash
-# Install dependencies
-pip install psutil matplotlib
+pip install psutil
 
-# Run the test
 python test/stress_test.py
-```
-
-### 2. API Test (`api_test.py`)
-
-Tests the API endpoints by making HTTP requests and measuring:
-- Response time
-- Success rate
-- Validation results
-
-**Usage:**
-```bash
-# Make sure the API server is running
-# In another terminal: uvicorn api:app --reload
-
-# Install dependencies
-pip install requests matplotlib
-
-# Run the test
-python test/api_test.py
 ```
 
 ## Requirements
@@ -45,8 +24,6 @@ python test/api_test.py
 - Python 3.7+
 - pandas
 - psutil (for memory usage tracking)
-- requests (for API testing)
-- matplotlib (for visualizations)
 
 ## Adding New Tests
 
