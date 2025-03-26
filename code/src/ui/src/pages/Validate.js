@@ -97,6 +97,9 @@ function Validate() {
             <p className="text-gray-700">
               Total Rows with Errors: {results.filter(result => result.Status === "Invalid").length}
             </p>
+            <p className="text-gray-700">
+              Total Rows Processed: {results.length}
+            </p>
           </div>
         </div>
       )}
