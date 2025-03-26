@@ -37,13 +37,10 @@ Explain the key features and functionalities of your project.
 
 ## 🛠️ How We Built It
 
-This project leverages a range of technologies and tools to ensure accurate and efficient regulatory data validation:
-
-- Python: The core programming language used for processing and validating datasets.
-
-- JSON: Defines the schema and validation rules for regulatory reporting.
-
-- GitHub: Version control and collaboration platform for tracking changes and contributions.
+## 🚧 Challenges We Faced
+1. **Difficulty in Parsing Large Files:** One of the primary challenges was effectively parsing very large files. Large Language Models (LLMs) face issues when dealing with such large data. It is essential to parse this extensive information without losing crucial details, which demands sophisticated methods and technologies.
+2. **Test Data Generation:** Another major hurdle was the generation of test data that accurately reflected real-world scenarios. This process was complex as it needed to ensure the test data was comprehensive and representative, allowing us to thoroughly validate our solutions and predict potential issues.
+3. **Rule Generation from Data:** Creating rules from the collected data was also a challenging task. This required deep analysis and understanding of the data patterns to develop accurate rules that could support decision-making processes and enhance system functionality.
 
 ## 🏃 How to Run
 
