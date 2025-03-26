@@ -22,9 +22,13 @@ function Validate() {
       // Add debug logging to see the response structure
       console.log("API Response:", response.data);
       
-      // Ensure the response data exists and has results
+      // Extract and transform the results
       if (response.data && response.data.results) {
-        setResults(response.data.results);
+        const resultsWithFirstColumn = response.data.results.map(result => ({
+          ...result,
+          firstColumn: result.firstColumn || result.TransactionID
+        }));
+        setResults(resultsWithFirstColumn);
       } else {
         setResults([]); // Set empty array if no results
       }
@@ -64,21 +68,37 @@ function Validate() {
 
       
 
-      {results && results.length > 0 && (
+      {results.length > 0 && (
         <div className="mt-6">
           <h2 className="text-lg font-bold">Validation Results</h2>
           <div className="space-y-4">
-            {results.map((validation, index) => (
-              <div key={index} className="bg-red-100 p-4 my-3 rounded-lg shadow">
-                <p className="font-semibold">Transaction ID: {validation.transactionId}</p>
-                <ul className="list-disc pl-5 text-red-600">
-                  {validation.errors && validation.errors.map((error, i) => (
-                    <li key={i}>{error}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+            {results
+              .filter(result => result.Status === "Invalid") // Only show invalid rows
+              .map((validation, index) => (
+                <div key={index} className="bg-red-100 p-4 my-3 rounded-lg shadow">
+                  <p className="font-semibold">
+                    {validation.firstColumn}: {validation.Message}
+                  </p>
+                  <ul className="list-disc pl-5 text-red-600">
+                    {validation.Errors.map((error, i) => (
+                      <li key={i}>{error}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
           </div>
+          
+          {/* Show statistics */}
+          <div className="mt-6 p-4 bg-gray-100 rounded-lg">
+            <h3 className="text-lg font-semibold">Validation Statistics:</h3>
+            <p className="text-gray-700">
+              Total Valid Rows: {results.filter(result => result.Status === "Valid").length}
+            </p>
+            <p className="text-gray-700">
+              Total Rows with Errors: {results.filter(result => result.Status === "Invalid").length}
+            </p>
+          </div>
+
           {/* Debug logging for results structure */}
           <pre className="mt-4 p-2 bg-gray-100 rounded text-xs overflow-auto max-h-60">
             <strong>Results Structure:</strong>
