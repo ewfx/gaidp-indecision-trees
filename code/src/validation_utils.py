@@ -30,7 +30,7 @@ def validate_data(record, schema):
             errors.append(error_message)
             print(f"Validation error in column '{failed_column}': {error.message}")
         
-        return False, "Multiple validation errors found", errors
+        return False, "Multiple validation errors", errors
     except Exception as e:
         return False, f"Validation failed: {str(e)}", [str(e)]
 
