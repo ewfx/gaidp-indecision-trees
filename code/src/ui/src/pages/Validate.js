@@ -19,6 +19,9 @@ function Validate() {
     try {
       const response = await axios.post("http://localhost:8000/validate", formData);
       
+      // Add debug logging to see the response structure
+      console.log("API Response:", response.data);
+      
       // Ensure the response data exists and has results
       if (response.data && response.data.results) {
         setResults(response.data.results);
@@ -64,16 +67,23 @@ function Validate() {
       {results && results.length > 0 && (
         <div className="mt-6">
           <h2 className="text-lg font-bold">Validation Results</h2>
-          {results.map((validation, index) => (
-            <div key={index} className="bg-red-100 p-4 my-3 rounded-lg shadow">
-              <p className="font-semibold">Transaction ID: {validation.transactionId}</p>
-              <ul className="list-disc pl-5 text-red-600">
-                {validation.errors && validation.errors.map((error, i) => (
-                  <li key={i}>{error}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          <div className="space-y-4">
+            {results.map((validation, index) => (
+              <div key={index} className="bg-red-100 p-4 my-3 rounded-lg shadow">
+                <p className="font-semibold">Transaction ID: {validation.transactionId}</p>
+                <ul className="list-disc pl-5 text-red-600">
+                  {validation.errors && validation.errors.map((error, i) => (
+                    <li key={i}>{error}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+          {/* Debug logging for results structure */}
+          <pre className="mt-4 p-2 bg-gray-100 rounded text-xs overflow-auto max-h-60">
+            <strong>Results Structure:</strong>
+            {JSON.stringify(results, null, 2)}
+          </pre>
         </div>
       )}
 
