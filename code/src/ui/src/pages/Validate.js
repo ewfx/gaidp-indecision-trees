@@ -39,8 +39,8 @@ function Validate() {
     formData.append("file", file);
 
     try {
-      const response = await axios.post("https://api.example.com/validate", formData);
-      setResults(response.data.validations);
+      const response = await axios.post("http://localhost:8000/validate", formData);
+      setResults(response.data.results);
     } catch (error) {
       console.error("Error validating data:", error);
     }

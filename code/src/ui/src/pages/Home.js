@@ -24,7 +24,7 @@ function Home() {
     formData.append("file", file);
 
     try {
-      const response = await axios.post("https://api.example.com/generate-rules", formData);
+      const response = await axios.post("http://localhost:8000/extract_rules", formData);
       setRules(response.data.rules);
     } catch (error) {
       console.error("Error generating rules:", error);
