@@ -122,7 +122,7 @@ Key Technologies Used:
 
 1. Clone the repository  
    ```sh
-   git clone https://github.com/your-repo.git
+   git clone [https://github.com/your-repo.git](https://github.com/ewfx/gaidp-indecision-trees.git)
    ```
 
 2. Install Python dependencies for the FastAPI backend:
